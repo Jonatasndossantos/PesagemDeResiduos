@@ -1,9 +1,9 @@
 <?php
-session_start();
-
-require_once('..\DAO\Conexao.php');
-
-use PHP\Modelo\DAO\Conexao;
+    namespace PHP\Modelo\Telas;
+    require_once('..\DAO\Consultar.php');
+    require_once('..\DAO\Conexao.php');
+    use PHP\Modelo\DAO\Consultar;
+    use PHP\Modelo\DAO\Conexao;
 ?>
 <html lang="en" data-bs-theme="light">
 <head>
@@ -12,7 +12,6 @@ use PHP\Modelo\DAO\Conexao;
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.122.0">
     <title>Signin</title>
 
@@ -30,11 +29,11 @@ use PHP\Modelo\DAO\Conexao;
             <h1 class="h3 mb-3 fw-normal">Faça login</h1>
 
             <div class="form-floating">
-                <input type="text" class="form-control" id="floatingInput" placeholder="999.999.999-99">
+                <input name="usuario" type="text" class="form-control" id="floatingInput" placeholder="Username">
                 <label for="validationDefaultUsername floatingInput">Usuario</label>
             </div>
             <div class="form-floating">
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                <input name="senha" type="password" class="form-control" id="floatingPassword" placeholder="Password">
                 <label for="validationDefaultUsername floatingPassword">Senha</label>
             </div>
 
@@ -56,10 +55,19 @@ use PHP\Modelo\DAO\Conexao;
                   </div>
                 
             </div>
-            <a href="menu.php" class="btn btn-primary w-100 py-2">Entrar
-            
+            <button class="btn btn-primary w-100 py-2">Entrar
+                <?php
+                if(isset($_POST['usuario'])&& isset($_POST['senha'])){
+                    $conexao   = new Conexao();
+                    $usuario   = $_POST['usuario'];
+                    $senha     = $_POST['senha'];
+                    $consultar = new Consultar();
+                    if consultarUsuarioIndividual(){
+                        echo "login"
+                    }
+                }          
+            ?>
             </button>
-            </a>
         </form>
         
         <p class="mt-5 mb-3 text-body-secondary">© 2017–2024</p>

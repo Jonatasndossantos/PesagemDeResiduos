@@ -54,6 +54,29 @@
                 echo $erro;
             }
         }//fim do consultarFuncionarioIndividual
+
+        function consultarUsuarioIndividual(
+            Conexao $conexao,
+            string $usuario,
+            string $senha
+        ){
+            try{
+                $conn = $conexao->conectar();
+                $sql  = "select * from Usuario where codigo = '$usuario'";
+                $result = mysqli_query($conn, $sql);
+
+                while($dados = mysqli_fetch_Array($result)){
+                    if($dados['codigo'] == $usuario){
+                        echo "<br>Usuario: ".$dados['codigo'].
+                             "<br>Senha: ".$dados['senha'];
+                        return;//Finalizar o while
+                    }
+                    return "código digitado invalido!";
+                }
+            }catch(Except $erro){
+                echo $erro;
+            }
+        }//fim do consultarUsuarioIndividual
     }//fim da classe
 
 

@@ -1,9 +1,11 @@
 <?php
     namespace PHP\Modelo\DAO;
 
+
     class Conexao{
         function conectar(){
             try{
+                
                 $conn = mysqli_connect('localhost', 'root', '', 'phpTINT');
                 if($conn){
                     echo "<br>Conectado com sucesso!";

@@ -4,8 +4,6 @@
     require_once('..\DAO\Conexao.php');
     use PHP\Modelo\DAO\Consultar;
     use PHP\Modelo\DAO\Conexao;
-
-
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
