@@ -62,8 +62,12 @@
                     $usuario   = $_POST['usuario'];
                     $senha     = $_POST['senha'];
                     $consultar = new Consultar();
-                    if consultarUsuarioIndividual(){
-                        echo "login"
+
+                    $resultado = $consultar->consultarUsuarioIndividual($conexao, $usuario, $senha);
+
+                    if ($resultado){
+                        header('Location: menu.php');
+                        echo "<script>window.location.href='menu.php';</script>";
                     }
                 }          
             ?>

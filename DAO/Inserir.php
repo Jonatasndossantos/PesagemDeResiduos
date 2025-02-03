@@ -6,16 +6,15 @@
     use PHP\Modelo\DAO\Conexao;
 
     class Inserir{
-        function cadastrarCliente(Conexao $conexao,
-                                  string $cpf,
-                                  string $nome,
-                                  string $endereco,
-                                  string $telefone,
-                                  float $totalDeCompras
-        ){try{
+        function cadastrarResiduos(Conexao $conexao,
+                                       string $data,
+                                       string $categoria,
+                                       float  $peso
+        ){
+            try{
                 $conn = $conexao->conectar();//Abrir banco de dados
-                $sql  = "insert into cliente(codigo,nome,telefone,endereco,total)
-                         values('$cpf','$nome','$telefone','$endereco','$totalDeCompras')";
+                $sql  = "insert into Residuos(codigo,data,categoria,peso)
+                         values('','$data','$categoria','$peso')";
                 $result = mysqli_query($conn, $sql);
                 mysqli_close($conn);
                 if($result){
@@ -25,11 +24,12 @@
             }catch(Except $erro){
                 return "<br><br> Algo deu errado".$erro;
             }
-        }//fim metodo cadastrarCliente
 
 
+        }//fim metodo cadastrarResiduos
 
-        function cadastrarFuncionario(Conexao $conexao,
+
+        function cadastrarUsuario(Conexao $conexao,
                                        string $cpf,
                                        string $nome,
                                        string $endereco,
@@ -38,7 +38,7 @@
         ){
             try{
                 $conn = $conexao->conectar();//Abrir banco de dados
-                $sql  = "insert into Funcionario(codigo,nome,telefone,endereco,salario)
+                $sql  = "insert into Usuario(codigo,nome,telefone,endereco,salario)
                          values('$cpf','$nome','$telefone','$endereco','$salario')";
                 $result = mysqli_query($conn, $sql);
                 mysqli_close($conn);
@@ -51,7 +51,7 @@
             }
 
 
-        }//fim metodo cadastrarfuncionario
+        }//fim metodo cadastrarUsuario
     
     
     }//Fim class

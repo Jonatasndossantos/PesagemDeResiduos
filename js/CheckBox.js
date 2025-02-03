@@ -1,24 +1,23 @@
 
-    $(document).ready(function(){
-        // Activate tooltip
-        $('[data-toggle="tooltip"]').tooltip();
-        
-        // Select/Deselect checkboxes
-        var checkbox = $('table tbody input[type="checkbox"]');
-        $("#selectAll").click(function(){
-            if(this.checked){
-                checkbox.each(function(){
-                    this.checked = true;                        
+    
+        document.addEventListener('DOMContentLoaded', function () {
+            const selectAllCheckbox = document.getElementById('selectAll');
+            const checkboxes = document.querySelectorAll('input[name="options[]"]');
+    
+            selectAllCheckbox.addEventListener('change', function () {
+                checkboxes.forEach((checkbox) => {
+                    checkbox.checked = selectAllCheckbox.checked;
                 });
-            } else{
-                checkbox.each(function(){
-                    this.checked = false;                        
+            });
+    
+            checkboxes.forEach((checkbox) => {
+                checkbox.addEventListener('change', function () {
+                    if (!checkbox.checked) {
+                        selectAllCheckbox.checked = false;
+                    } else {
+                        const allChecked = Array.from(checkboxes).every((cb) => cb.checked);
+                        selectAllCheckbox.checked = allChecked;
+                    }
                 });
-            } 
+            });
         });
-        checkbox.click(function(){
-            if(!this.checked){
-                $("#selectAll").prop("checked", false);
-            }
-        });
-    });
