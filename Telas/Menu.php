@@ -9,6 +9,17 @@
     use PHP\Modelo\Cliente;
     use PHP\Modelo\DAO\Conexao;
     use PHP\Modelo\DAO\Inserir;
+
+    session_start(); // Inicia a sessão
+
+// Verifica se o usuário está logado
+if (!isset($_SESSION['usuario'])) {
+    // Redireciona para a página de login
+    header('Location: login.php');
+    exit();
+}
+
+$usuarioLogado = $_SESSION['usuario']; // Obtém o nome do usuário logado
 ?>
 
 <!DOCTYPE html>
@@ -30,18 +41,11 @@
     <?php include('../Templetes/BotaoDark.php');?>
     <!--fim botao dark-->
 
-<div class="table-responsive">
-<a href="cadastroFuncionario.php"><button>Cadastrar Funcionario</button></a>
-<a href="cadastroCliente.php"><button>Cadastrar Cliente</button></a>
-<a href="consultarCliente.php"><button>Consultar Cliente</button></a>
-<a href="consultarFuncionario.php"><button>Consultar Funcionario</button></a>
-<a href="atualizarCliente.php"><button>Atualizar Cliente</button></a>
-<a href="atualizarFuncionario.php"><button>Atualizar Funcionario</button></a>
-<a href="excluirCliente.php"><button>Excluir Cliente</button></a>
-<a href="excluirFuncionario.php"><button>Excluir Funcionario</button></a>
+    <?php include('../templetes/navBar.php') ?>
+
 
 <!--https://www.php.net/manual/en/mysqli-result.fetch-array.php-->
-<?php include('test.php');?>
+<?php include('../Templetes/test.php');?>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 

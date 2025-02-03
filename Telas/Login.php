@@ -1,9 +1,37 @@
 <?php
+
     namespace PHP\Modelo\Telas;
+    
+    session_start(); // Inicia a sessão
+    
     require_once('..\DAO\Consultar.php');
     require_once('..\DAO\Conexao.php');
     use PHP\Modelo\DAO\Consultar;
     use PHP\Modelo\DAO\Conexao;
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (isset($_POST['usuario']) && isset($_POST['senha'])) {
+            $conexao = new Conexao();
+            $usuario = $_POST['usuario'];
+            $senha = $_POST['senha'];
+            $consultar = new Consultar();
+    
+            // Verifica o usuário e a senha
+            $resultado = $consultar->consultarUsuarioIndividual($conexao, $usuario, $senha);
+    
+            if ($resultado) {
+                // Armazena o nome do usuário na sessão
+                $_SESSION['usuario'] = $usuario;
+    
+                // Redireciona para a página do menu
+                header('Location: Menu.php');
+                exit();
+            } else {
+                // Exibe uma mensagem de erro
+                echo "<script>alert('Usuário ou senha incorretos!');</script>";
+            }
+        }
+    }
 ?>
 <html lang="en" data-bs-theme="light">
 <head>
@@ -56,21 +84,7 @@
                 
             </div>
             <button class="btn btn-primary w-100 py-2">Entrar
-                <?php
-                if(isset($_POST['usuario'])&& isset($_POST['senha'])){
-                    $conexao   = new Conexao();
-                    $usuario   = $_POST['usuario'];
-                    $senha     = $_POST['senha'];
-                    $consultar = new Consultar();
-
-                    $resultado = $consultar->consultarUsuarioIndividual($conexao, $usuario, $senha);
-
-                    if ($resultado){
-                        header('Location: menu.php');
-                        echo "<script>window.location.href='menu.php';</script>";
-                    }
-                }          
-            ?>
+                
             </button>
         </form>
         

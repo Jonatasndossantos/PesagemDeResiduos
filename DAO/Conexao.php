@@ -3,10 +3,9 @@
 
 
     class Conexao{
-        function conectar(){
-            try{
-                
-                $conn = mysqli_connect('localhost', 'root', '', 'phpTINT');
+        public function conectar(){
+            try{                
+                $conn = mysqli_connect('localhost', 'root', '', 'Pesagem');
                 if($conn){
                     echo "<br>Conectado com sucesso!";
                     return $conn;
@@ -16,6 +15,8 @@
                 return "Algo deu errado!<br><br>".$erro;
             }
         }//Fim conectar
+
+
     }//Fim class
 
 ?>
