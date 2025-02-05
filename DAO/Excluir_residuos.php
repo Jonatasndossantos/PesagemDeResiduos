@@ -7,27 +7,31 @@ require_once('Excluir.php'); // Inclui a classe de exclusão
 use PHP\Modelo\DAO\Conexao;
 use PHP\Modelo\DAO\Excluir;
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['codigos'])) {
-        $codigos = explode(',', $_POST['codigos']); // Converte a string de códigos em um array
-
-        $conexao = new Conexao();
-        $excluir = new Excluir();
-
-        foreach ($codigos as $codigo) {
-            $codigo = (int)$codigo; // Converte o código para int
-            $result = $excluir->excluirResiduos($conexao, $codigo);
-            if (!$result) {
-                echo "Erro ao excluir o resíduo com código: $codigo";
-                exit();
-            }
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['codigos'])) {
+    $conexao = new Conexao();
+    $conn = $conexao->conectar();
+    
+    if ($conn) {
+        $codigos = explode(',', $_POST['codigos']);
+        $codigos = array_map('intval', $codigos); // Sanitiza os valores
+        $codigosString = implode(',', $codigos);
+        
+        $sql = "DELETE FROM residuos WHERE codigo IN ($codigosString)";
+        
+        if (mysqli_query($conn, $sql)) {
+            echo "success";
+        } else {
+            http_response_code(500);
+            echo "Erro ao excluir: " . mysqli_error($conn);
         }
-
-        echo "Resíduos excluídos com sucesso!";
-        header('Location: ../Telas/Menu.php'); // Redireciona para a página principal
-        exit();
+        
+        mysqli_close($conn);
     } else {
-        echo "Nenhum resíduo selecionado.";
+        http_response_code(500);
+        echo "Erro na conexão com o banco de dados";
     }
+} else {
+    http_response_code(400);
+    echo "Requisição inválida";
 }
 ?>

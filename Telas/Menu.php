@@ -32,16 +32,20 @@ $usuarioLogado = $_SESSION['usuario']; // Obtém o nome do usuário logado
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     
     <link rel="stylesheet" href="../Css/BotaoDark.css">
+    <style>
+        body{
+        background-image: url(../img/Reciclagem.jpeg);
+    }
+    </style>
     
 
     <!-- Custom styles for this template -->
 </head>
-<body class="container">
+<body>
     <!--botao dark-->
     <?php include('../Templetes/BotaoDark.php');?>
     <!--fim botao dark-->
 
-    <?php include('../templetes/navBar.php') ?>
 
 
 <!--https://www.php.net/manual/en/mysqli-result.fetch-array.php-->

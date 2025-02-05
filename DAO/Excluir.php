@@ -4,7 +4,7 @@
     use PHP\Modelo\DAO\Conexao;
 
     class excluir{
-        function excluirResiduos2(
+        function excluirResiduos(
             conexao $conexao,
             int $codigo
         ){
@@ -20,7 +20,7 @@
                 echo "Não deletado!";
             }
         }//fim excluirResiduos
-        public function excluirResiduos(Conexao $conexao, $codigo): bool {
+        public function excluirResiduos2(Conexao $conexao, $codigo): bool {
             $codigo = (int)$codigo; // Converte o valor para int
             try {
                 $conn = $conexao->conectar();
